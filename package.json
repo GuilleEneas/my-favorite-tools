@@ -9,12 +9,14 @@
     "ng": "ng",
     "precommit": "run-s format:fix lint",
     "start": "ng serve",
-    "test": "ng test"
+    "test": "ng test",
+    "test:headless": "npm run test -- --browsers=ChromeHeadless",
+    "test:headless:nw": "npm run test:headless -- --watch=false"
   },
   "husky": {
     "hooks": {
       "pre-commit": "pretty-quick --staged",
-      "pre-push": "ng test"
+      "pre-push": "npm run test:headless:nw"
     }
   },
   "private": true,
