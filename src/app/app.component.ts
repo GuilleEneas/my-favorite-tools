@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { State } from './state';
 import { Observable } from 'rxjs';
 import { rateTool } from './state/rate-tool.actions';
+import { startAutoRate, stopAutoRate } from './state/auto-rate.actions';
 
 @Component({
   selector: 'app-root',
@@ -12,8 +13,8 @@ import { rateTool } from './state/rate-tool.actions';
 })
 export class AppComponent implements OnInit {
   title = 'My Favorite Tools';
-
   tools$: Observable<Tool[]>;
+  private randomGenerationOn: boolean;
 
   constructor(private store: Store<State>) {}
 
@@ -23,5 +24,14 @@ export class AppComponent implements OnInit {
 
   rateTool(index: number, rating: number) {
     this.store.dispatch(rateTool({ index, rating }));
+  }
+
+  toggleRandom() {
+    if (this.randomGenerationOn) {
+      this.store.dispatch(stopAutoRate());
+    } else {
+      this.store.dispatch(startAutoRate());
+    }
+    this.randomGenerationOn = !this.randomGenerationOn;
   }
 }

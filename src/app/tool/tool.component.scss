@@ -1,10 +1,29 @@
 :host {
   display: flex;
-  text-transform: uppercase;
   justify-content: flex-start;
   align-content: center;
+  width: 256px;
+  border: 1px solid grey;
+  border-radius: 4px;
+  margin-bottom: 8px;
+  padding: 4px;
+}
+
+.info {
+  height: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-left: 16px;
 }
 
 .name {
-  min-width: 200px;
+  margin-bottom: 4px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.rating {
+  margin-top: 4px;
 }

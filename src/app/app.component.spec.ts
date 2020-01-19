@@ -6,6 +6,7 @@ import { of } from 'rxjs';
 import { Tool } from './models/tool.type';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { rateTool } from './state/rate-tool.actions';
+import { startAutoRate, stopAutoRate } from './state/auto-rate.actions';
 
 @Component({
   selector: 'app-tool',
@@ -72,6 +73,35 @@ describe('AppComponent', () => {
       const expectedAction = rateTool({ index: 0, rating: 3 });
 
       component.rateTool(0, 3);
+
+      expect(componentService.dispatch).toHaveBeenCalledWith(expectedAction);
+    });
+  });
+
+  describe('METHOD toggleRandom', () => {
+    it('should dispatch startAutoRate action when random generations is off', () => {
+      const fixture = TestBed.createComponent(AppComponent);
+      fixture.detectChanges();
+      const component = fixture.componentInstance;
+      const componentService = fixture.debugElement.injector.get(Store);
+      spyOn(componentService, 'dispatch');
+      const expectedAction = startAutoRate();
+
+      component.toggleRandom();
+
+      expect(componentService.dispatch).toHaveBeenCalledWith(expectedAction);
+    });
+
+    it('should dispatch stopAutoRate action when random generations is off', () => {
+      const fixture = TestBed.createComponent(AppComponent);
+      fixture.detectChanges();
+      const component = fixture.componentInstance;
+      component['randomGenerationOn'] = true;
+      const componentService = fixture.debugElement.injector.get(Store);
+      spyOn(componentService, 'dispatch');
+      const expectedAction = stopAutoRate();
+
+      component.toggleRandom();
 
       expect(componentService.dispatch).toHaveBeenCalledWith(expectedAction);
     });

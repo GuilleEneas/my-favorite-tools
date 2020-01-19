@@ -1,5 +1,7 @@
 <h1 class="title">{{ title }}</h1>
 
+<button nz-button nzType="primary" (click)="toggleRandom()">RANDOM</button>
+
 <app-tool
   class="tool"
   *ngFor="let tool of tools$ | async; let index = index"

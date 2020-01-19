@@ -1,2 +1,6 @@
-<div class="name">{{ tool.name }}</div>
-<app-rating [rating]="tool.rating" (ratingChange)="updateRating($event)"> </app-rating>
+<img height="80" width="80" src="/assets/{{ tool.img }}" />
+
+<div class="info">
+  <app-rating class="rating" [rating]="tool.rating" (ratingChange)="updateRating($event)"></app-rating>
+  <div class="name">{{ tool.name }}</div>
+</div>

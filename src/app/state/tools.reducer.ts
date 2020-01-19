@@ -9,16 +9,16 @@ export const toolsFeatureKey = 'tools';
 export type State = Tool[];
 
 export const initialState: State = [
-  { name: 'hammer', rating: 0 },
-  { name: 'screwdriver', rating: 0 },
-  { name: 'spanner', rating: 0 },
-  { name: 'wrench', rating: 0 },
-  { name: 'drill', rating: 0 },
-  { name: 'saw', rating: 0 },
-  { name: 'pliers', rating: 0 },
-  { name: 'shovel', rating: 0 },
-  { name: 'rake', rating: 0 },
-  { name: 'sanding machine', rating: 0 }
+  { name: 'hammer', rating: 0, img: 'hammer.jpg' },
+  { name: 'screwdriver', rating: 0, img: 'screwdriver.jpg' },
+  { name: 'spanner', rating: 0, img: 'spanner.jpg' },
+  { name: 'wrench', rating: 0, img: 'wrench.jpg' },
+  { name: 'drill', rating: 0, img: 'drill.jpg' },
+  { name: 'saw', rating: 0, img: 'saw.jpg' },
+  { name: 'pliers', rating: 0, img: 'pliers.jpg' },
+  { name: 'shovel', rating: 0, img: 'shovel.jpg' },
+  { name: 'rake', rating: 0, img: 'rake.jpg' },
+  { name: 'sanding machine', rating: 0, img: 'sanding.jpg' }
 ];
 
 const toolsReducer = createReducer(
