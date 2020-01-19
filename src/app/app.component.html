@@ -1,3 +1,8 @@
 <h1 class="title">{{ title }}</h1>
 
-<div class="tool" *ngFor="let tool of tools$ | async">{{ tool.name }}</div>
+<app-tool
+  class="tool"
+  *ngFor="let tool of tools$ | async; let index = index"
+  [tool]="tool"
+  (rateTool)="rateTool(index, $event)"
+></app-tool>

@@ -4,19 +4,32 @@ import { By } from '@angular/platform-browser';
 import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
 import { Tool } from './models/tool.type';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { rateTool } from './state/rate-tool.actions';
+
+@Component({
+  selector: 'app-tool',
+  template: '<div></div>'
+})
+class MockToolComponent {
+  @Input() tool: Tool;
+  @Output() rateTool = new EventEmitter<number>();
+}
 
 describe('AppComponent', () => {
   const mockTools: Tool[] = [{ name: 'mock tool', rating: 0 }];
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [AppComponent],
+      declarations: [AppComponent, MockToolComponent],
       providers: [
         {
           provide: Store,
           useValue: {
             select() {
               return of(mockTools);
-            }
+            },
+            dispatch() {}
           }
         }
       ]
@@ -47,5 +60,20 @@ describe('AppComponent', () => {
     fixture.detectChanges();
     const tools = fixture.debugElement.queryAll(By.css('.tool'));
     expect(tools.length).toEqual(mockTools.length);
+  });
+
+  describe('METHOD rateTool', () => {
+    it('should dispatch rateTool action', () => {
+      const fixture = TestBed.createComponent(AppComponent);
+      fixture.detectChanges();
+      const component = fixture.componentInstance;
+      const componentService = fixture.debugElement.injector.get(Store);
+      spyOn(componentService, 'dispatch');
+      const expectedAction = rateTool({ index: 0, rating: 3 });
+
+      component.rateTool(0, 3);
+
+      expect(componentService.dispatch).toHaveBeenCalledWith(expectedAction);
+    });
   });
 });

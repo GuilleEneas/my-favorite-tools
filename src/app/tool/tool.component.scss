@@ -1,0 +1,10 @@
+:host {
+  display: flex;
+  text-transform: uppercase;
+  justify-content: flex-start;
+  align-content: center;
+}
+
+.name {
+  min-width: 200px;
+}

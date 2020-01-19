@@ -1,0 +1,10 @@
+<i
+  *ngFor="let iconTheme of iconThemes; let index = index"
+  [ngClass]="{ filled: iconTheme, hovered: index <= highestHovered }"
+  nz-icon
+  nzType="star"
+  [nzTheme]="'fill'"
+  (click)="rate(index + 1)"
+  (mouseenter)="willSelect(index)"
+  (mouseleave)="willSelect(-1)"
+></i>

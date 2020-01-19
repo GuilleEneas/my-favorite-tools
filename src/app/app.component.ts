@@ -3,7 +3,7 @@ import { Tool } from './models/tool.type';
 import { Store } from '@ngrx/store';
 import { State } from './state';
 import { Observable } from 'rxjs';
-import { sortTools } from './state/sort-tools.actions';
+import { rateTool } from './state/rate-tool.actions';
 
 @Component({
   selector: 'app-root',
@@ -19,5 +19,9 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.tools$ = this.store.select('tools');
+  }
+
+  rateTool(index: number, rating: number) {
+    this.store.dispatch(rateTool({ index, rating }));
   }
 }
