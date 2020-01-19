@@ -1,5 +1,7 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import { Tool } from '../models/tool.type';
+import { sortTools } from './sort-tools.actions';
+import * as _ from 'lodash';
 
 export const toolsFeatureKey = 'tools';
 
@@ -18,7 +20,10 @@ export const initialState: State = [
   { name: 'sanding machine', rating: 0 }
 ];
 
-const toolsReducer = createReducer(initialState);
+const toolsReducer = createReducer(
+  initialState,
+  on(sortTools, state => [..._.cloneDeep(state).sort((a, b) => b.rating - a.rating)])
+);
 
 export function reducer(state: State | undefined, action: Action) {
   return toolsReducer(state, action);

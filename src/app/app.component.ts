@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Tool } from './models/tool.type';
 import { Store } from '@ngrx/store';
 import { State } from './state';
-// tslint:disable-next-line:import-blacklist
 import { Observable } from 'rxjs';
+import { sortTools } from './state/sort-tools.actions';
 
 @Component({
   selector: 'app-root',
