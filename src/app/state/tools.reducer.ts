@@ -2,6 +2,7 @@ import { Action, createReducer, on } from '@ngrx/store';
 import { Tool } from '../models/tool.type';
 import { sortTools } from './sort-tools.actions';
 import * as _ from 'lodash';
+import { rateTool } from './rate-tool.actions';
 
 export const toolsFeatureKey = 'tools';
 
@@ -22,7 +23,12 @@ export const initialState: State = [
 
 const toolsReducer = createReducer(
   initialState,
-  on(sortTools, state => [..._.cloneDeep(state).sort((a, b) => b.rating - a.rating)])
+  on(sortTools, state => [..._.cloneDeep(state).sort((a, b) => b.rating - a.rating)]),
+  on(rateTool, (state: State, { index, rating }: { index: number; rating: number }) =>
+    [...state.slice(0, index), { ...state[index], rating }, ...state.slice(index + 1)].filter(({ name }) =>
+      Boolean(name)
+    )
+  )
 );
 
 export function reducer(state: State | undefined, action: Action) {
