@@ -125,5 +125,8 @@
         }
       }
     }},
-  "defaultProject": "my-favorite-tools"
+  "defaultProject": "my-favorite-tools",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics"
+  }
 }

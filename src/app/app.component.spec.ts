@@ -1,11 +1,25 @@
 import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { By } from '@angular/platform-browser';
+import { Store } from '@ngrx/store';
+import { of } from 'rxjs';
+import { Tool } from './models/tool.type';
 
 describe('AppComponent', () => {
+  const mockTools: Tool[] = [{ name: 'mock tool', rating: 0 }];
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [AppComponent]
+      declarations: [AppComponent],
+      providers: [
+        {
+          provide: Store,
+          useValue: {
+            select() {
+              return of(mockTools);
+            }
+          }
+        }
+      ]
     }).compileComponents();
   }));
 
@@ -28,10 +42,10 @@ describe('AppComponent', () => {
     expect(compiled.querySelector('.title').textContent).toContain('My Favorite Tools');
   });
 
-  it('should render 10 tasks', () => {
+  it(`should render ${mockTools.length} tasks`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const tools = fixture.debugElement.queryAll(By.css('.tool'));
-    expect(tools.length).toEqual(10);
+    expect(tools.length).toEqual(mockTools.length);
   });
 });

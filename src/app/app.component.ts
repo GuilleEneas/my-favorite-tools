@@ -1,28 +1,23 @@
-import { Component } from '@angular/core';
-
-interface Tool {
-  name: string;
-  rating: number;
-}
+import { Component, OnInit } from '@angular/core';
+import { Tool } from './models/tool.type';
+import { Store } from '@ngrx/store';
+import { State } from './state';
+// tslint:disable-next-line:import-blacklist
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'My Favorite Tools';
 
-  tools: Tool[] = [
-    { name: 'hammer', rating: 0 },
-    { name: 'screwdriver', rating: 0 },
-    { name: 'spanner', rating: 0 },
-    { name: 'wrench', rating: 0 },
-    { name: 'drill', rating: 0 },
-    { name: 'saw', rating: 0 },
-    { name: 'pliers', rating: 0 },
-    { name: 'shovel', rating: 0 },
-    { name: 'rake', rating: 0 },
-    { name: 'sanding machine', rating: 0 }
-  ];
+  tools$: Observable<Tool[]>;
+
+  constructor(private store: Store<State>) {}
+
+  ngOnInit() {
+    this.tools$ = this.store.select('tools');
+  }
 }
